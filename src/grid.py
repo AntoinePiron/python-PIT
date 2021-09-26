@@ -37,7 +37,7 @@ class SudokuGrid:
         res = ""
         #On va ajouter les différents numéro en prenant soin de faire un retour à la ligne
         #tout les 9 caractères pour bien correspondre à une grille de sudoku
-        for i in range(len(intToStr)/9):
+        for i in range(0,len(intToStr), 9):
             res += intToStr[i:i+9] + "\n"
         return res
 
