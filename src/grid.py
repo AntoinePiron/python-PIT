@@ -1,9 +1,13 @@
 #-*-coding: utf8-*-
+import linecache
+from os import replace
 
 class SudokuGrid:
 
     def __init__(self, initial_values_str):
         #Si la longueur est bonne on tente alors de convertir à l'aide d'un bloc try 
+        if len(initial_values_str) != 81:
+            raise ValueError()
         try:
             self.grid = int(initial_values_str)
         except:
@@ -11,12 +15,9 @@ class SudokuGrid:
 
     @staticmethod
     def from_file(filename, line):
-        #On ouvre le fichier en mode lecture
-        file = open(filename, 'r')
-        #On stock son contenu
-        content = file.readlines()
         #On vient alors récuperer notre ligne specifique, on prend line -1 la ligne 1 = index 0
-        specificLine = content[line-1]
+        specificLine = linecache.getline(filename, line-1)
+        specificLine = specificLine.replace(".", "")
         #On vient alors générer la grille de sudoku avec la ligne en paramètre, pas besoin de la vérifier, ce sera fait dans le constructeur
         return SudokuGrid(specificLine)
 
@@ -65,7 +66,7 @@ class SudokuGrid:
         #On vient d'abord récuperer les lignes correspondantes 
         for a in range(reg_row*3,reg_row*3 + 3, 1):
             rowindice = a*9
-            subList.append(b for b in intToStr[rowindice:rowindice + 9])
+            subList.append([b for b in intToStr[rowindice:rowindice + 9]])
         #On vient alors récuperer les colones qui vont avec 
         colIndice = reg_col*3
         while colIndice < len(subList):
