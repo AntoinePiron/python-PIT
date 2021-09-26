@@ -20,11 +20,16 @@ class SudokuGrid:
         content = file.readlines()
         #On vient alors récuperer notre ligne specifique, on prend line -1 la ligne 1 = index 0
         specificLine = content[line-1]
+        #On vient alors générer la grille de sudoku avec la ligne en paramètre, pas besoin de la vérifier, ce sera fait dans le constructeur
         return SudokuGrid(specificLine)
 
     @staticmethod
     def from_stdin():
-        raise NotImplementedError()
+        #On vient récuperer la saisie utilisateur
+        line = input("Veuillez indiquer votre grille de sudoku : ")
+        #On retourne alors une instance avec cette ligne en param
+        #A nouveau pas besoin de la vérifier car ce sera effectue dans le constructeur
+        return SudokuGrid(line)
 
     def __str__(self):
         #on convertit d'abord notre grille de int en str
