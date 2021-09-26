@@ -42,7 +42,7 @@ class SudokuGrid:
 
     def get_row(self, i):
         #La ligne va correspondre à une position dans la chaine de int
-        position = i*9 #avec cette formule on a bien l1 = 0, l2 = 9 etc
+        position = int(i*9) #avec cette formule on a bien l1 = 0, l2 = 9 etc
         #On vient alors récuperer le tout avec une liste en compréhension
         res = [int(a) for a in str(self.grid)[position:position+9]]
         return res
@@ -94,7 +94,14 @@ class SudokuGrid:
         return res
 
     def write(self, i, j, v):
-        raise NotImplementedError()
+        #Pour obtenir la position on se base sur la méthode du dessus qu'on remonte à l'envers
+        position = int(j + 9*i)
+        #On convertit en string pour se balader 
+        intToStr = str(self.grid)
+        #on vient remplacer le caractere
+        intToStr = intToStr[:position] + str(v) + intToStr[position+1:]
+        #puis on affecte à la grid
+        self.grid = int(intToStr)
 
     def copy(self):
         raise NotImplementedError()
