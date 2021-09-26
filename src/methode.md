@@ -42,7 +42,7 @@ Cette méthode extrait une ligne donnée de la grille de Sudoku.
 :return: La liste des valeurs présentes à la ligne donnée
 :rtype: list of int
 
-### get_col
+### get_col
 Cette méthode extrait une colonne donnée de la grille de Sudoku.
 *Variante avancée: Renvoyez un générateur sur les valeurs au lieu d'une liste*
 :param j: Numéro de la colonne à extraire, entre 0 et 8
