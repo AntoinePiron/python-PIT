@@ -104,4 +104,4 @@ class SudokuGrid:
         self.grid = int(intToStr)
 
     def copy(self):
-        raise NotImplementedError()
+        return SudokuGrid(str(self.grid))
