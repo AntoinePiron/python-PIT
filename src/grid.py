@@ -58,7 +58,21 @@ class SudokuGrid:
         return res
 
     def get_region(self, reg_row, reg_col):
-        raise NotImplementedError()
+        #On convertit en string pour se balader 
+        intToStr = str(self.grid)
+        res = []
+        subList = []
+        #On vient d'abord récuperer les lignes correspondantes 
+        for a in range(reg_row*3,reg_row*3 + 3, 1):
+            rowindice = a*9
+            subList.append(b for b in intToStr[rowindice:rowindice + 9])
+        #On vient alors récuperer les colones qui vont avec 
+        colIndice = reg_col*3
+        while colIndice < len(subList):
+            for id in range(colIndice,colIndice+3):
+                res.append(int(intToStr[id]))
+            colIndice += 9
+        return res
 
     def get_empty_positions(self):
         raise NotImplementedError()
