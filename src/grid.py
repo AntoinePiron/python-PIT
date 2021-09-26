@@ -1,6 +1,5 @@
 #-*-coding: utf8-*-
 import linecache
-from os import replace
 
 class SudokuGrid:
 
