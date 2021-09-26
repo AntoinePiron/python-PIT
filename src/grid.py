@@ -64,7 +64,7 @@ class SudokuGrid:
         intToStr = str(self.grid)
         res = []
         subList = []
-        #On vient d'abord récuperer les lignes correspondantes 
+        #On vient d'abord récuperer les lignes correspondantes qu'on stockd dans une liste secondaire
         for a in range(reg_row*3,reg_row*3 + 3, 1):
             rowindice = a*9
             for pos in range(rowindice, rowindice + 9):
@@ -79,8 +79,19 @@ class SudokuGrid:
 
         return res
 
-    def get_empty_positions(self):
-        raise NotImplementedError()
+    def get_empty_pos(self):
+        #On convertit en string pour se balader 
+        intToStr = str(self.grid)
+        res = []
+        for i in range(len(intToStr)):
+            if intToStr[i] == '0':
+                #la position de la colonne est le reste de la divisin entiere de l'indice par 9
+                cpos = i%9
+                #on obitent le numero de ligne divisant par 9 pour obtenir la ligne
+                lpos = (i - cpos)/9
+                res.append((lpos,cpos))
+            
+        return res
 
     def write(self, i, j, v):
         raise NotImplementedError()
