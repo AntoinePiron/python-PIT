@@ -3,9 +3,6 @@
 class SudokuGrid:
 
     def __init__(self, initial_values_str):
-        #Dans un premier temps si la longueur ne convient pas on lève immédiatement une erreur
-        if len(initial_values_str) != 81:
-                raise ValueError()
         #Si la longueur est bonne on tente alors de convertir à l'aide d'un bloc try 
         try:
             self.grid = int(initial_values_str)
