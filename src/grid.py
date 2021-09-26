@@ -42,7 +42,12 @@ class SudokuGrid:
         return res
 
     def get_row(self, i):
-        raise NotImplementedError()
+        #La ligne va correspondre à une position dans la chaine de int
+        #exemple : ligne 1 = position 0 et les 9 entier qui suivent
+        #ligne 2 = position 9 et les 9 entiers qui suivent
+        position = (i-1)*9 #avec cette formule on a bien l1 = 0, l2 = 9 etc
+        res = [int(a) for a in str(self.grid)[position:position+9]]
+        return res
 
     def get_col(self, j):
         raise NotImplementedError()
