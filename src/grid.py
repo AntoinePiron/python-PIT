@@ -67,13 +67,16 @@ class SudokuGrid:
         #On vient d'abord récuperer les lignes correspondantes 
         for a in range(reg_row*3,reg_row*3 + 3, 1):
             rowindice = a*9
-            subList.append([b for b in intToStr[rowindice:rowindice + 9]])
+            for pos in range(rowindice, rowindice + 9):
+                subList.append(intToStr[pos])
+
         #On vient alors récuperer les colones qui vont avec 
         colIndice = reg_col*3
         while colIndice < len(subList):
             for id in range(colIndice,colIndice+3):
-                res.append(int(intToStr[id]))
+                res.append(int(subList[id]))
             colIndice += 9
+
         return res
 
     def get_empty_positions(self):
