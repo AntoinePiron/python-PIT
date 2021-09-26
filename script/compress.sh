@@ -1,1 +1,3 @@
-bonjour test
+#!/bin/bash
+
+Test de commit
