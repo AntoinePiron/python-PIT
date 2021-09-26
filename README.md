@@ -1,2 +1,2 @@
-# python-PIT
-Projet en python pour finir PIT
+# Projet en python pour PIT
+*Une collaboration entre DEVIN Tristan, GUY Nicolas et PIRON Antoine*
