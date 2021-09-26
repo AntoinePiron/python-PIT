@@ -49,7 +49,16 @@ class SudokuGrid:
         return res
 
     def get_col(self, j):
-        raise NotImplementedError()
+        #On convertit en string pour se balader 
+        intToStr = str(self.grid)
+        #On initialise le tableau de retour vide
+        res = []
+        indice = j
+        #On vient alors ajouter en se baladant tout les 9 indice ce qui correspond à une colonne
+        while indice < len(intToStr):
+            res.append(int(intToStr[indice]))
+            indice += 9
+        return res
 
     def get_region(self, reg_row, reg_col):
         raise NotImplementedError()
