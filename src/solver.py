@@ -42,8 +42,11 @@ class SudokuSolver:
         for val in self.solutions:
             #si jamais un des tuples de valeurs poossibles ne contient plus qu'une val
             if len(val[1]) == 1:
-                self.grid.write(val[0][0],val[0][1],val[1])
-                return (val[0][0],val[0][1],val[1])
+                test = 0
+                for i in val[1]:
+                    test = i
+                self.grid.write(val[0][0],val[0][1],test)
+                return (val[0][0],val[0][1],test)
         else:
             return None
 
@@ -52,8 +55,8 @@ class SudokuSolver:
         last_change = -1
         
         while last_change is not None:
-            last_change = self.grid.commit_one_var()
-            self.grid.reduce_domains(*last_change)
+            last_change = self.commit_one_var()
+            self.reduce_domains(*last_change)
             self.solutions.remove(((last_change[0], last_change[1]), set()))
 
     def is_valid(self):
@@ -83,8 +86,24 @@ class SudokuSolver:
         return res
 
     def solve(self):
-        self.grid.solve_step()
-        if self.grid.is_solved():
+        # print("oui")
+        self.solve_step()
+        if self.is_solved():
+            # print(self.grid)
+            # print("Résolu !")
+            # print(len(self.branch()), "branches")
             return self.grid
+        elif self.is_valid():
+            oui = self.branch()
+            for element in oui:
+                # print("oui")
+                # print(element)
+                s = element.solve()
+                if s is not None:
+                    # print("S renvoyé")
+                    return s
+            return None
         else:
             return None
+        # print("Pas résolue")
+        # raise NotImplementedError()
