@@ -29,11 +29,18 @@ class SudokuSolver:
             self.solutions.append((allPos, val_poss))
 
     def reduce_domains(self, last_i, last_j, last_v):
-        
-        raise NotImplementedError()
+        for val in self.solutions:
+            ##On récupère la région de l'elements courant et de l'element precedent
+            region_val = (val[0][0] // 3, val[0][1] // 3)
+            region_last = (last_i // 3, last_j // 3)
+            if last_v in val[1] and (
+                    val[0][0] == last_i or val[0][1] == last_j or (region_val == region_last)):
+                val[1].remove(last_v)
 
     def commit_one_var(self):
+        #On vient parcourir les solutions
         for val in self.solutions:
+            #si jamais un des tuples de valeurs poossibles ne contient plus qu'une val
             if len(val[1]) == 1:
                 self.grid.write(val[0][0],val[0][1],val[1])
                 return (val[0][0],val[0][1],val[1])
