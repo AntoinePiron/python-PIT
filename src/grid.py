@@ -63,9 +63,8 @@ class SudokuGrid:
         res = []
         subList = []
         #On vient d'abord récuperer les lignes correspondantes qu'on stockd dans une liste secondaire
-        for a in range(int(reg_row*3),int(reg_row*3 + 3), 1):
-            rowindice = a*9
-            for pos in range(rowindice, rowindice + 9):
+        for a in range(int(reg_row*3),int(reg_row*3 + 3), 9):
+            for pos in range(a, a + 9):
                 subList.append(intToStr[pos])
 
         #On vient alors récuperer les colones qui vont avec 
@@ -102,4 +101,5 @@ class SudokuGrid:
         self.grid = int(intToStr)
 
     def copy(self):
-        return SudokuGrid(str(self.grid))
+        res = str(self.grid)
+        return SudokuGrid(res)
