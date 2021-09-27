@@ -29,7 +29,6 @@ class SudokuSolver:
             self.solutions.append((allPos, val_poss))
 
     def reduce_domains(self, last_i, last_j, last_v):
-        
         raise NotImplementedError()
 
     def commit_one_var(self):
@@ -41,7 +40,10 @@ class SudokuSolver:
             return None
 
     def solve_step(self):
-        raise NotImplementedError()
+        # Tant qu'il reste des cases vides on continue 
+        while(self.grid.get_empty_pos() != []):
+            self.grid.commit_one_var()
+            self.grid.reduce_domains
 
     def is_valid(self):
         raise NotImplementedError()
