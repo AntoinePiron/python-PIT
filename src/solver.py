@@ -50,8 +50,8 @@ class SudokuSolver:
     def solve_step(self):
         # Tant qu'il reste des cases vides on continue 
         while(self.grid.get_empty_pos() != []):
-            self.grid.commit_one_var()
-            self.grid.reduce_domains
+            t = self.grid.commit_one_var()
+            self.grid.reduce_domains(*t)
 
     def is_valid(self):
         raise NotImplementedError()
