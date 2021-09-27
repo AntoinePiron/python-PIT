@@ -9,6 +9,7 @@ class SudokuSolver:
         self.grid = grid
         #On appel ensuite la méthode comme demandé
         self.reduce_all_domains()
+        #On crée une liste
 
     def reduce_all_domains(self):
         #On va explorer toutes les positions vides 
@@ -25,10 +26,17 @@ class SudokuSolver:
             self.solutions.append((allPos, val_poss))
 
     def reduce_domains(self, last_i, last_j, last_v):
+        
         raise NotImplementedError()
 
     def commit_one_var(self):
-        raise NotImplementedError()
+        for (i,j) in self.empty_cell:
+            if len(self.solutions[i][j]) == 1:
+                self.grid[i][j] = self.val_poss
+                return 
+            else :
+                pass
+        return None
 
     def solve_step(self):
         raise NotImplementedError()
@@ -37,7 +45,7 @@ class SudokuSolver:
         raise NotImplementedError()
 
     def is_solved(self):
-        raise NotImplementedError()
+        return(not self.grid.get_empty_pos())
 
     def branch(self):
         raise NotImplementedError()
