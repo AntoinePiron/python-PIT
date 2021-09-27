@@ -68,19 +68,19 @@ class SudokuSolver:
         return(not self.grid.get_empty_pos())
 
     def branch(self):
-        #Le tableau de retour
-        res = []
+        liste_solutions = []
         coordonnees_mini = ()
         set_mini = {}
         self.solutions.sort(key=lambda oui: len(oui[1]))
         coordonnees_mini = self.solutions[0][0]
         set_mini = self.solutions[0][1]
         for i in set_mini:
-            curr_grid = self.grid.copy()
-            curr_grid.write(coordonnees_mini[0], coordonnees_mini[1], i)
-            subProb = self.__class__(curr_grid)
-            res.append(subProb)
-        return res
+            grille_sudoku_en_cours = self.grid.copy()
+            grille_sudoku_en_cours.write(coordonnees_mini[0], coordonnees_mini[1], i)
+            sous_probleme = self.__class__(grille_sudoku_en_cours)
+            liste_solutions.append(sous_probleme)
+        # print(liste_solutions)
+        return liste_solutions
 
     def solve(self):
         self.grid.solve_step()
