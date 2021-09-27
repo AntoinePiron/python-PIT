@@ -33,9 +33,9 @@ class SudokuSolver:
         raise NotImplementedError()
 
     def commit_one_var(self):
-        for (i,j) in self.empty_cell:
+        for (i,j) in self.grid.get_empty_pos():
             if len(self.solutions[i][j]) == 1:
-                self.grid[i][j] = self.val_poss
+                self.grid[i][j] = self.solutions[i][j][0]
                 return 
             else :
                 pass
