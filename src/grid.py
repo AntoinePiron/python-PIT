@@ -14,11 +14,10 @@ class SudokuGrid:
 
     @staticmethod
     def from_file(filename, line):
-        #On vient alors récuperer notre ligne specifique, on prend line -1 la ligne 1 = index 0
-        specificLine = linecache.getline(filename, line-1)
-        #Il faut penser à enlever le caractère de retour à la ligne pour bien avoir 81 caractère
-        specificLine = specificLine.strip('\n')
-        #On vient alors générer la grille de sudoku avec la ligne en paramètre, pas besoin de la vérifier, ce sera fait dans le constructeur
+        database = open(filename, 'r')
+        all_lines = database.readlines()
+        specificLine = all_lines[line].strip("\n")
+        database.close()
         return SudokuGrid(specificLine)
 
     @staticmethod
