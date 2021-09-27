@@ -54,7 +54,11 @@ class SudokuSolver:
             self.grid.reduce_domains(*t)
 
     def is_valid(self):
-        raise NotImplementedError()
+        for element in self.solutions:
+            if element[1] != set():
+                return True
+            else:
+                return False
 
     def is_solved(self):
         #L'expression not liste permet de verifier si cettte derniere est vide
