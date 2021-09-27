@@ -63,4 +63,8 @@ class SudokuSolver:
         raise NotImplementedError()
 
     def solve(self):
-        raise NotImplementedError()
+        self.grid.solve_step()
+        if self.grid.is_solved():
+            return self.grid
+        else:
+            return None
