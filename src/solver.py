@@ -91,24 +91,15 @@ class SudokuSolver:
         return liste_solutions
 
     def solve(self):
-        # print("oui")
         self.solve_step()
         if self.is_solved():
-            # print(self.grid)
-            # print("Résolu !")
-            # print(len(self.branch()), "branches")
             return self.grid
         elif self.is_valid():
             oui = self.branch()
             for element in oui:
-                # print("oui")
-                # print(element)
                 s = element.solve()
                 if s is not None:
-                    # print("S renvoyé")
                     return s
             return None
         else:
             return None
-        # print("Pas résolue")
-        # raise NotImplementedError()
