@@ -1,5 +1,8 @@
 #-*-coding: utf8-*-
 
+from unittest.case import doModuleCleanups
+
+
 class SudokuSolver:
 
     def __init__(self, grid):
@@ -52,11 +55,13 @@ class SudokuSolver:
 
     def solve_step(self):
         # Tant qu'il reste des cases vides on continue 
-        last_change = -1
-        
+        last_change = (0,0,0)
+    
         while last_change is not None:
             last_change = self.commit_one_var()
-            self.reduce_domains(*last_change)
+            if last_change is None:
+                break
+            self.reduce_domains(last_change[0], last_change[1], last_change[2])
             self.solutions.remove(((last_change[0], last_change[1]), set()))
 
     def is_valid(self):
