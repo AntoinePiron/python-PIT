@@ -9,6 +9,7 @@ class SudokuGrid:
             raise ValueError()
         try:
             self.grid = int(initial_values_str)
+            
         except:
             raise ValueError()
 
