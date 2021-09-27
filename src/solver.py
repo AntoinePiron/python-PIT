@@ -54,7 +54,7 @@ class SudokuSolver:
         while last_change is not None:
             last_change = self.grid.commit_one_var()
             self.grid.reduce_domains(*last_change)
-            self.solutions.remove(((t[0], t[1]), set()))
+            self.solutions.remove(((last_change[0], last_change[1]), set()))
 
     def is_valid(self):
         for element in self.solutions:
