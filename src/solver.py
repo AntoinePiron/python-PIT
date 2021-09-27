@@ -33,13 +33,12 @@ class SudokuSolver:
         raise NotImplementedError()
 
     def commit_one_var(self):
-        for (i,j) in self.grid.get_empty_pos():
-            if len(self.solutions[i][j]) == 1:
-                self.grid[i][j] = self.solutions[i][j][0]
-                return 
-            else :
-                pass
-        return None
+        for val in self.solutions:
+            if len(val[1]) == 1:
+                self.grid.write(val[0][0],val[0][1],val[1])
+                return (val[0][0],val[0][1],val[1])
+        else:
+            return None
 
     def solve_step(self):
         raise NotImplementedError()
