@@ -32,7 +32,9 @@ class SudokuSolver:
         raise NotImplementedError()
 
     def commit_one_var(self):
+        #On vient parcourir les solutions
         for val in self.solutions:
+            #si jamais un des tuples de valeurs poossibles ne contient plus qu'une val
             if len(val[1]) == 1:
                 self.grid.write(val[0][0],val[0][1],val[1])
                 return (val[0][0],val[0][1],val[1])
