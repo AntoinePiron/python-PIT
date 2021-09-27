@@ -49,9 +49,12 @@ class SudokuSolver:
 
     def solve_step(self):
         # Tant qu'il reste des cases vides on continue 
-        while(self.grid.get_empty_pos() != []):
-            t = self.grid.commit_one_var()
-            self.grid.reduce_domains(*t)
+        last_change = -1
+        
+        while last_change is not None:
+            last_change = self.grid.commit_one_var()
+            self.grid.reduce_domains(*last_change)
+            self.solutions.remove(((t[0], t[1]), set()))
 
     def is_valid(self):
         for element in self.solutions:
