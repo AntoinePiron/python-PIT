@@ -53,11 +53,8 @@ class SudokuSolver:
         else:
             return None
 
-    def solve_step(self):
-        # Tant qu'il reste des cases vides on continue 
-        last_change = (0,0,0)
-    
-        while last_change is not None:
+    def solve_step(self):    
+        while 1:
             last_change = self.commit_one_var()
             if last_change is None:
                 break
@@ -87,7 +84,6 @@ class SudokuSolver:
             grille_sudoku_en_cours.write(coordonnees_mini[0], coordonnees_mini[1], i)
             sous_probleme = self.__class__(grille_sudoku_en_cours)
             liste_solutions.append(sous_probleme)
-        # print(liste_solutions)
         return liste_solutions
 
     def solve(self):
