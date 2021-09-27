@@ -57,6 +57,7 @@ class SudokuSolver:
         raise NotImplementedError()
 
     def is_solved(self):
+        #L'expression not liste permet de verifier si cettte derniere est vide
         return(not self.grid.get_empty_pos())
 
     def branch(self):
