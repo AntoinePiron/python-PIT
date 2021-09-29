@@ -59,19 +59,20 @@ class SudokuGrid:
         return res
 
     def get_region(self, reg_row, reg_col):
-        #On convertit en string pour se balader 
+         # On convertit en string pour se balader
         intToStr = str(self.grid)
         res = []
         subList = []
-        #On vient d'abord récuperer les lignes correspondantes qu'on stockd dans une liste secondaire
-        for a in range(int(reg_row*3),int(reg_row*3 + 3), 9):
-            for pos in range(a, a + 9):
+        # On vient d'abord récuperer les lignes correspondantes qu'on stockd dans une liste secondaire
+        for a in range(reg_row * 3, reg_row * 3 + 3, 1):
+            rowindice = a * 9
+            for pos in range(rowindice, rowindice + 9):
                 subList.append(intToStr[pos])
 
-        #On vient alors récuperer les colones qui vont avec 
-        colIndice = reg_col*3
+        # On vient alors récuperer les colones qui vont avec
+        colIndice = reg_col * 3
         while colIndice < len(subList):
-            for id in range(colIndice,colIndice+3):
+            for id in range(colIndice, colIndice + 3):
                 res.append(int(subList[id]))
             colIndice += 9
 
