@@ -33,7 +33,8 @@ class SudokuSolver:
 
     def reduce_domains(self, last_i, last_j, last_v):
         for val in self.solutions:
-        ##On récupère la région de l'elements courant et de l'element precedent
+            #On récupère la région de l'elements courant et de l'element precedent
+            # l'opérateur // est une division entière
             region_val = (val[0][0] // 3, val[0][1] // 3)
             region_last = (last_i // 3, last_j // 3)
             if last_v in val[1] and (
@@ -41,17 +42,18 @@ class SudokuSolver:
                 val[1].remove(last_v)
     
     def commit_one_var(self):
-        #On vient parcourir les solutions
+        retResult = ()
+        #On se balade parmi les solutions
         for val in self.solutions:
-            #si jamais un des tuples de valeurs poossibles ne contient plus qu'une val
+            #Si jamais le tuple de solutions ne fait que 1 <=> une seule solution possible pour la case
             if len(val[1]) == 1:
-                test = 0
-                for i in val[1]:
-                    test = i
-                self.grid.write(val[0][0],val[0][1],test)
-                return (val[0][0],val[0][1],test)
-        else:
-            return None
+                #On écrit notre valeur 
+                self.grid.write(val[0][0], val[0][1], next(iter(val[1])))
+                #Puis on retourne comme demandé
+                retResult = (val[0][0], val[0][1], next(iter(val[1])))
+                return retResult
+        #Si jamais on est sorti du for c'est qu'aucune solution n'a été trouvé => on return None
+        return None
 
     def solve_step(self):    
         while 1:
@@ -69,8 +71,11 @@ class SudokuSolver:
                 return False
 
     def is_solved(self):
-        #L'expression not liste permet de verifier si cettte derniere est vide
-        return(not self.grid.get_empty_pos())
+        complete = False
+        if not list(self.grid.get_empty_pos()):
+            complete = True
+        return complete
+
 
     def branch(self):
         liste_solutions = []
