@@ -49,10 +49,8 @@ class SudokuGrid:
         return res
 
     def get_row(self, i):
-        #La ligne va correspondre à une position dans la chaine de int
-        position = int(i*9) #avec cette formule on a bien l1 = 0, l2 = 9 etc
-        #On vient alors récuperer le tout avec une liste en compréhension
-        res = [int(a) for a in str(self.grid)[position:position+9]]
+        #On vient récuperer la ligne spécifié à l'aide d'une liste en compréhension qui se balade dans la ligne
+        res = [self.grid[i][colonne] for colonne in range(9)]
         return res
 
     def get_col(self, j):
