@@ -56,16 +56,24 @@ class SudokuSolver:
         return None
 
     def solve_step(self):    
-        while 1:
+        last_change = -1
+        #Comme nous allons utilisé la méthode commit_one_var pn va boucler tant que notre résultat n'est pas nul
+        #Autrement dit on boucle tant qu'il y a des valeurs à rentrer dans la grille
+        while last_change is not None:
+            #on tente des solutions
             last_change = self.commit_one_var()
-            if last_change is None:
-                break
-            self.reduce_domains(last_change[0], last_change[1], last_change[2])
-            self.solutions.remove(((last_change[0], last_change[1]), set()))
+            if last_change is not None:
+                #Comme on a trouvé une valeur on vient l'enlever des différentes solutions
+                self.solutions.remove(((last_change[0], last_change[1]), set()))
+                #Comme on a rajouté une valeur dans la grille on doit réactualiser les solutions
+                self.reduce_domains(last_change[0], last_change[1], last_change[2])
+                last_change = ()
 
     def is_valid(self):
-        for element in self.solutions:
-            if element[1] != set():
+        #On vient se balader dans la liste de solution
+        for val in self.solutions:
+            #Si un set de solution n'est pas vide cela siginifie que la solution courante est encore valable 
+            if val[1] != set():
                 return True
             else:
                 return False
