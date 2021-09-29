@@ -64,12 +64,12 @@ class SudokuGrid:
         res = []
         subList = []
         # On vient d'abord récuperer les lignes correspondantes qu'on stockd dans une liste secondaire
-        for a in range(reg_row * 3, reg_row * 3 + 3, 1):
+        for a in range(int(reg_row * 3), int(reg_row * 3 + 3), 1):
             rowindice = a * 9
             for pos in range(rowindice, rowindice + 9):
                 subList.append(intToStr[pos])
 
-        # On vient alors récuperer les colones qui vont avec
+        # On vient alors récuperer les colonnes qui vont avec
         colIndice = reg_col * 3
         while colIndice < len(subList):
             for id in range(colIndice, colIndice + 3):
