@@ -18,9 +18,13 @@ class SudokuGrid:
 
     @staticmethod
     def from_file(filename, line):
+        #On ouvre dans un premier temps le fichier en mode lecture 
         database = open(filename, 'r')
+        #On vient alors lire les lignes
         all_lines = database.readlines()
+        #On récupere la ligne qui nous intéresse en prenant soin de retirer le caractère de retour à la ligne
         specificLine = all_lines[line].strip("\n")
+        #On oublie pas de refermer le fichier 
         database.close()
         return SudokuGrid(specificLine)
 
@@ -29,17 +33,19 @@ class SudokuGrid:
         #On vient récuperer la saisie utilisateur
         line = input("Veuillez indiquer votre grille de sudoku : ")
         #On retourne alors une instance avec cette ligne en param
-        #A nouveau pas besoin de la vérifier car ce sera effectue dans le constructeur
+        #Pas besoin de la vérifier car ce sera effectue dans le constructeur
         return SudokuGrid(line)
 
     def __str__(self):
-        #on convertit d'abord notre grille de int en str
-        intToStr = str(self.grid)
+        #Le string finale comtenant la grille 
         res = ""
-        #On va ajouter les différents numéro en prenant soin de faire un retour à la ligne
-        #tout les 9 caractères pour bien correspondre à une grille de sudoku
-        for i in range(0,len(intToStr), 9):
-            res += intToStr[i:i+9] + "\n"
+        for row in range(9):
+            #On va reconstruire chaque ligne grace au double for
+            line = ""
+            for col in range(9):
+                line += str(self.grid[row][col])
+            #A chaque tour on ajoute la ligne suivi d'un retour
+            res += line + "\n"
         return res
 
     def get_row(self, i):
