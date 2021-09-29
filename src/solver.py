@@ -63,10 +63,10 @@ class SudokuSolver:
             #on tente des solutions
             last_change = self.commit_one_var()
             if last_change is not None:
-                #Comme on a trouvé une valeur on vient l'enlever des différentes solutions
-                self.solutions.remove(((last_change[0], last_change[1]), set()))
                 #Comme on a rajouté une valeur dans la grille on doit réactualiser les solutions
                 self.reduce_domains(last_change[0], last_change[1], last_change[2])
+                #Comme on a trouvé une valeur on vient l'enlever des différentes solutions
+                self.solutions.remove(((last_change[0], last_change[1]), set()))
                 last_change = ()
 
     def is_valid(self):
