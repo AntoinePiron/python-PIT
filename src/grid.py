@@ -50,65 +50,31 @@ class SudokuGrid:
 
     def get_row(self, i):
         #On vient récuperer la ligne spécifié à l'aide d'une liste en compréhension qui se balade dans la ligne
-        res = [self.grid[i][colonne] for colonne in range(9)]
+        res = [self.grid[i][col] for col in range(9)]
         return res
 
     def get_col(self, j):
-        #On convertit en string pour se balader 
-        intToStr = str(self.grid)
-        #On initialise le tableau de retour vide
-        res = []
-        indice = j
-        #On vient alors ajouter en se baladant tout les 9 indice ce qui correspond à une colonne
-        while indice < len(intToStr):
-            res.append(int(intToStr[indice]))
-            indice += 9
+        #Cette méthode est finalement similaire à la précedente on ne se balade juste pas dans le même sens
+        res = [self.grid[row][j] for row in range(9)]
         return res
 
     def get_region(self, reg_row, reg_col):
-         # On convertit en string pour se balader
-        intToStr = str(self.grid)
-        res = []
-        subList = []
-        # On vient d'abord récuperer les lignes correspondantes qu'on stockd dans une liste secondaire
-        for a in range(int(reg_row * 3), int(reg_row * 3 + 3), 1):
-            rowindice = a * 9
-            for pos in range(rowindice, rowindice + 9):
-                subList.append(intToStr[pos])
-
-        # On vient alors récuperer les colonnes qui vont avec
-        colIndice = reg_col * 3
-        while colIndice < len(subList):
-            for id in range(colIndice, colIndice + 3):
-                res.append(int(subList[id]))
-            colIndice += 9
-
+        #A l'aide d'une liste en compréhension et d'un double for on va pouvoir récuperer aisément toutes les valeurs de la régions spécifié par l'utilisateur
+        res = [self.grid[i + reg_row * 3][j + reg_col * 3] for i in range(3) for j in range(3)]
         return res
 
     def get_empty_pos(self):
-        #On convertit en string pour se balader 
-        intToStr = str(self.grid)
-        res = []
-        for i in range(len(intToStr)):
-            if intToStr[i] == '0':
-                #la position de la colonne est le reste de la divisin entiere de l'indice par 9
-                cpos = i%9
-                #on obitent le numero de ligne divisant par 9 pour obtenir la ligne
-                lpos = (i - cpos)/9
-                res.append((lpos,cpos))
-            
+        #On va récuperer toutes les listes des positions vides en compréhension de nouveau
+        #Il suffit simpleemet de vérifier si la position est vide 
+        res = [(i,j) for i in range(9) for j in range(9) if self.grid[i][j] == 0]
         return res
 
     def write(self, i, j, v):
-        #Pour obtenir la position on se base sur la méthode du dessus qu'on remonte à l'envers
-        position = int(j + 9*i)
-        #On convertit en string pour se balader 
-        intToStr = str(self.grid)
-        #on vient remplacer le caractere
-        intToStr = intToStr[:position] + str(v) + intToStr[position+1:]
-        #puis on affecte à la grid
-        self.grid = int(intToStr)
+        #On affecte simplement la valeur 
+        self.grid[i][j] = v
 
     def copy(self):
-        res = str(self.grid)
-        return SudokuGrid(res)
+        old = [[self.grid[i][j] for j in range(9)] for i in range(9)]
+        new_grid = self.__new__(self.__class__)
+        new_grid.grid = old
+        return new_grid
