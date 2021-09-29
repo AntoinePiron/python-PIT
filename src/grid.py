@@ -4,14 +4,17 @@ import linecache
 class SudokuGrid:
 
     def __init__(self, initial_values_str):
-        #Si la longueur est bonne on tente alors de convertir à l'aide d'un bloc try 
-        if len(initial_values_str) != 81:
-            raise ValueError()
-        try:
-            self.grid = int(initial_values_str)
-            
-        except:
-            raise ValueError()
+        #On ne rentre que si la longueur est la bonne 
+        if len(initial_values_str) == 81:
+            try:
+                #On va créer un tableau à double entrée qui contient nos chiffres et qui représenteras notre grille
+                self.grid = [[int(initial_values_str[i + 9 * j]) for i in range(9)] for j in range(9)]
+            except ValueError:
+                print("Valeur incorrect")
+                raise ValueError
+        else:
+            print("Longueur incorrect")
+            raise ValueError
 
     @staticmethod
     def from_file(filename, line):
