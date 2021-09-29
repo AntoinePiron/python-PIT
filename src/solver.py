@@ -80,13 +80,16 @@ class SudokuSolver:
 
     def is_solved(self):
         complete = False
+        # On vérifie s'il reste des cases vides
         if not list(self.grid.get_empty_pos()):
+            #S'il n'y  plus de cases vides on peut alors returne True
             complete = True
         return complete
 
 
     def branch(self):
-        liste_solutions = []
+        #On initialise la liste de sous problème qui va être rempli
+        subProb_list = []
         coordonnees_mini = ()
         set_mini = {}
         self.solutions.sort(key=lambda oui: len(oui[1]))
@@ -96,8 +99,8 @@ class SudokuSolver:
             grille_sudoku_en_cours = self.grid.copy()
             grille_sudoku_en_cours.write(coordonnees_mini[0], coordonnees_mini[1], i)
             sous_probleme = self.__class__(grille_sudoku_en_cours)
-            liste_solutions.append(sous_probleme)
-        return liste_solutions
+            subProb_list.append(sous_probleme)
+        return subProb_list
 
     def solve(self):
         self.solve_step()
