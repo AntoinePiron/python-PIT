@@ -1,13 +1,40 @@
 #!/usr/bin/env python3
 #-*-coding: utf8-*-
 import tkinter as tk
+from tkmacosx import Button
+from tkinter.constants import *
+from grid import SudokuGrid
+
+def createGrid(grid):
+    win = tk.Tk()
+    win.title("Suduoku main")
+    for rowindex in range (9):
+        for colindex in range (9):
+            if (rowindex in (0,1,2,6,7,8) and colindex in (3,4,5) or (rowindex in (3,4,5) and colindex in (0,1,2,6,7,8))):
+                    colour="light blue"
+            else:
+                colour="white"
+            x=grid[rowindex][colindex]
+            if x==0:
+                colourTxt="red"
+            else:
+                colourTxt="black" 
+            #Sur macos je suis obligé d'utiliser l'import tkmacosx la ligne pour les autres systemes d'exploitation est commenté    
+            #MAC
+            btn=Button(win, width=60, height=60, bg=colour, text=x, fg=colourTxt)  
+            #AUTRE 
+            #btn=tk.Button(win, width=60, height=60, bg=colour, text=x, fg=colourTxt)  
+            btn.grid(row=rowindex, column=colindex, sticky=N+S+E+W)
+            btn.grid(row=rowindex, column=colindex, sticky=N+S+E+W)
+
+    win.mainloop()
 
 def gameScreen():
-    print("ok")
+    gridToSend = SudokuGrid.from_file("sudoku_db.txt", 1)
+    createGrid(gridToSend.grid)
 
 def which_button(entry, window):
-    #Quelque soit le choix de l'utilisateur on va quitter la fenetre 
-    window.quit()
+    window.destroy()
     if entry == "Play":
         gameScreen()
 
