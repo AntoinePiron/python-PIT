@@ -53,9 +53,5 @@ def entry_screen():
     quitButton.place(relx=.5, rely=.55, anchor="center")
     win.mainloop()
 
-def main():
-    entry_screen()
-    pass
-
 if __name__ == "__main__":
-    main()
+    entry_screen()
