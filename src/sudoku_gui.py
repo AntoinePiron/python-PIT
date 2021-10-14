@@ -45,7 +45,7 @@ def which_button(entry, window):
     window.destroy()
     if entry == "Play":
         gameScreen()
-#test 1212    
+#test 2   
 #Cette méthode va servir d'écran d'accueil pour le jeu 
 def entry_screen():
     #Création de la fenetre
