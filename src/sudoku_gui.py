@@ -38,14 +38,14 @@ def createGrid(sudokgrid):
     win.mainloop()
 
 def gameScreen():
-    gridToSend = SudokuGrid.from_file("sudoku_db.txt", 1)
+    gridToSend = SudokuGrid.from_file('../sudoku_db.txt', 1)
     createGrid(gridToSend)
 
 def which_button(entry, window):
     window.destroy()
     if entry == "Play":
         gameScreen()
-
+#test 1212    
 #Cette méthode va servir d'écran d'accueil pour le jeu 
 def entry_screen():
     #Création de la fenetre
