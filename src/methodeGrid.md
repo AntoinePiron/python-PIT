@@ -1,5 +1,6 @@
 # Description des méthodes pour grid.py
 *Pour plus de clareté dans le code nous allons déporter les indications dans ce fichier*
+test
 
 ## SudokuGrid
 Cette classe représente une grille de Sudoku.
