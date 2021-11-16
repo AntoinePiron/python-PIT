@@ -1,7 +1,7 @@
 # Description des méthodes pour grid.py
 *Pour plus de clareté dans le code nous allons déporter les indications dans ce fichier*
 test
-
+eske ça marche encore
 ## SudokuGrid
 Cette classe représente une grille de Sudoku.
 Toutes ces méthodes sont à compléter en vous basant sur la documentation fournie en docstring.
